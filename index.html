@@ -1,1 +1,613 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Mundo de Yasmim Vitória</title>
+    <style>
+        :root {
+            --bg-page: #dcd6f7; /* Tom de lavanda suave para o fundo total */
+            --bg-pattern: #cbbbf6; /* Cor para os detalhes do padrão de fundo */
+            --bg-container: #ede7f6; /* Fundo do container principal */
+            --bg-card: #4a3e6d; /* Roxo escuro/lavanda profundo para os cards e cabeçalho */
+            --text-light: #f3effe; /* Texto claro para usar dentro dos cards escuros */
+            --text-dark: #2c2243; /* Texto escuro para o fundo claro */
+            --accent-pink: #b39ddb; /* Lavanda pastel para flores e detalhes */
+            --accent-gold: #b2a4d4; /* Lilás suave para as bordas e molduras */
+            --border-radius-main: 24px;
+        }
 
+        /* Configurações de Fundo */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-page);
+            background-image: radial-gradient(var(--bg-pattern) 15%, transparent 16%),
+                              radial-gradient(var(--bg-pattern) 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Container Principal */
+        .blog-wrapper {
+            max-width: 1050px;
+            width: 100%;
+            background-color: var(--bg-container);
+            border: 4px double var(--accent-gold);
+            border-radius: var(--border-radius-main);
+            box-shadow: 0 12px 36px rgba(44, 34, 67, 0.2);
+            padding: 25px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .blog-wrapper::before, .blog-wrapper::after {
+            content: "✿";
+            position: absolute;
+            font-size: 24px;
+            color: var(--accent-pink);
+            top: 15px;
+        }
+        .blog-wrapper::before { left: 25px; }
+        .blog-wrapper::after { right: 25px; }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--bg-card);
+            background-image: linear-gradient(45deg, #3c315b 25%, transparent 25%, transparent 75%, #3c315b 75%, #3c315b),
+                              linear-gradient(45deg, #3c315b 25%, transparent 25%, transparent 75%, #3c315b 75%, #3c315b);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 18px;
+            border: 2px solid var(--accent-gold);
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.6rem;
+            margin: 0;
+            font-family: 'Georgia', serif;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Botão para Alternar o Tema */
+        .theme-toggle-box {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .theme-btn {
+            background-color: var(--bg-card);
+            color: var(--text-light);
+            border: 2px solid var(--accent-pink);
+            padding: 10px 22px;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            background-color: var(--accent-pink);
+            color: var(--bg-card);
+            transform: scale(1.03);
+        }
+
+        /* Seção Perfil */
+        .profile-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .decoration-circle {
+            width: 90px;
+            height: 90px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            background-color: rgba(255, 255, 255, 0.5);
+            color: var(--text-dark);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .yasmim-avatar-box {
+            text-align: center;
+            position: relative;
+        }
+
+        .yasmim-avatar-box img {
+            width: 170px;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--accent-pink);
+            outline: 2px solid var(--accent-gold);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        .yasmim-badge {
+            background-color: var(--bg-card);
+            color: var(--text-light);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            border: 2px solid var(--accent-gold);
+            display: inline-block;
+            margin-top: -15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Layout */
+        .main-layout {
+            display: flex;
+            gap: 25px;
+        }
+
+        .feed {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        article {
+            background-color: var(--bg-card);
+            color: var(--text-light);
+            border-radius: 20px;
+            border: 2px solid var(--accent-gold);
+            padding: 20px;
+            box-shadow: 0 6px 15px rgba(44, 34, 67, 0.15);
+            box-sizing: border-box;
+        }
+
+        .post-grid {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .post-image {
+            flex: 1.1;
+            max-width: 260px;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .post-content {
+            flex: 2;
+        }
+
+        article h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.5rem;
+            color: var(--accent-pink);
+            font-family: 'Georgia', serif;
+        }
+
+        article p {
+            margin: 0 0 10px 0;
+            font-size: 0.98rem;
+            line-height: 1.5;
+            color: #ede7f6;
+        }
+
+        article ul {
+            margin: 0 0 10px 0;
+            padding-left: 20px;
+            color: #ede7f6;
+        }
+
+        article li {
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        /* Rodapé do post */
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.2);
+            padding-top: 12px;
+        }
+
+        .actions-box {
+            display: flex;
+            gap: 8px;
+        }
+
+        .actions-box button, .comment-toggle {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: background 0.2s;
+        }
+
+        .actions-box button:hover, .comment-toggle:hover {
+            background-color: var(--accent-pink);
+            color: var(--bg-card);
+        }
+
+        /* Caixa de Comentários */
+        .comments-block {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .comment-row {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 6px 0;
+            font-size: 0.9rem;
+        }
+
+        .comment-row strong { color: var(--accent-pink); }
+
+        .comment-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .comment-inputs input, .comment-inputs textarea {
+            background-color: rgba(255,255,255,0.9);
+            color: #000;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        .comment-inputs button {
+            align-self: flex-end;
+            background-color: var(--accent-pink);
+            color: var(--bg-card);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Barra Lateral */
+        aside {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 250px;
+        }
+
+        .sidebar-box {
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 2px solid var(--accent-gold);
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .sidebar-box h3 {
+            margin: 0 0 12px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--accent-pink);
+            padding-bottom: 4px;
+        }
+
+        .archive-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .archive-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 8px;
+            background-color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 6px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 850px) {
+            .main-layout { flex-direction: column; }
+            aside { max-width: 100%; }
+            .post-grid { flex-direction: column; align-items: flex-start; }
+            .post-image { max-width: 100%; width: 100%; }
+            .decoration-circle { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="blog-wrapper">
+        <header>
+            <h1>O Mundo de Yasmim Vitória</h1>
+        </header>
+
+        <div class="theme-toggle-box">
+            <button class="theme-btn" id="themeBtn" onclick="alternarTema()">✨ Mudar Tema: Guia de Curiosidades</button>
+        </div>
+
+        <div class="profile-section">
+            <div class="decoration-circle">🐎</div> 
+            <div class="yasmim-avatar-box">
+                <img src="yasmim.png" alt="Yasmim Vitória">
+                <div></div>
+                <span class="yasmim-badge">Yasmim Vitória 💜</span>
+            </div>
+            
+            <div class="decoration-circle">🐺</div> 
+        </div>
+
+        <div class="main-layout">
+            
+            <div class="feed">
+                
+                <article>
+                    <div class="post-grid">
+                        <div class="post-image">
+                            <img src="lobos.png" alt="Lobos">
+                        </div>
+                        <div class="post-content" id="post-lobos">
+                            <h2>Lobos: Meus Animais Favoritos</h2>
+                            <p>Os lobos são criaturas simplesmente fascinantes. Além da beleza misteriosa, o que eu mais admiro neles é o forte senso de lealdade e união. Eles vivem em alcateias onde cada membro protege o outro.</p>
+                            <p>Eles simbolizam a liberdade, a intuição e a força selvagem que me inspira todos os dias.</p>
+                            <p><strong>Querem mais informações sobre o modo de vida deles? Deixem nos comentários!</strong></p>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="actions-box">
+                            <button class="like-btn">❤️ <span>0</span></button>
+                            <button class="like-btn">👍 <span>0</span></button>
+                        </div>
+                        <button class="comment-toggle">💬 Comentários (<span class="ccount">0</span>)</button>
+                    </div>
+                    <div class="comments-block">
+                        <div class="comments-list"></div>
+                        <form class="comment-inputs" onsubmit="enviarComentario(event, this)">
+                            <input type="text" placeholder="Seu nome..." required>
+                            <textarea placeholder="Deixe um comentário ou peça mais detalhes..." rows="2" required></textarea>
+                            <button type="submit">Enviar</button>
+                        </form>
+                    </div>
+                </article>
+
+                <article>
+                    <div class="post-grid">
+                        <div class="post-image">
+                            <img src="cavalos.png" alt="Cavalos">
+                        </div>
+                        <div class="post-content" id="post-cavalos">
+                            <h2>A Nobreza e Graciosidade dos Cavalos</h2>
+                            <p>Se existe um animal que representa a pura elegância, com certeza é o cavalo. O modo como correm livres transmite uma sensação inexplicável de paz e poder.</p>
+                            <p>Eles são companheiros históricos, inteligentes e extremamente sensíveis ao nosso carinho.</p>
+                            <p><strong>Se quiserem saber mais sobre raças ou curiosidades, deixem nos comentários o que querem ver no próximo post!</strong></p>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="actions-box">
+                            <button class="like-btn">❤️ <span>0</span></button>
+                            <button class="like-btn">👍 <span>0</span></button>
+                        </div>
+                        <button class="comment-toggle">💬 Comentários (<span class="ccount">0</span>)</button>
+                    </div>
+                    <div class="comments-block">
+                        <div class="comments-list"></div>
+                        <form class="comment-inputs" onsubmit="enviarComentario(event, this)">
+                            <input type="text" placeholder="Seu nome..." required>
+                            <textarea placeholder="Escreva aqui sua dúvida ou sugestão..." rows="2" required></textarea>
+                            <button type="submit">Enviar</button>
+                        </form>
+                    </div>
+                </article>
+
+                <article>
+                    <div class="post-grid">
+                        <div class="post-image">
+                            <img src="animes.png" alt="Animes">
+                        </div>
+                        <div class="post-content" id="post-animes">
+                            <h2>Minha Paixão pelo Universo dos Animes</h2>
+                            <p>Os animes ocupam uma parte enorme do meu tempo livre! O que eu mais gosto nas animações japonesas é a capacidade que elas têm de contar histórias profundas e cheias de lições sobre amizade e superação.</p>
+                            <p><strong>Caso queiram mais informações sobre as minhas indicações de animes favoritos, deixem nos comentários!</strong></p>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="actions-box">
+                            <button class="like-btn">❤️ <span>0</span></button>
+                            <button class="like-btn">👍 <span>0</span></button>
+                        </div>
+                        <button class="comment-toggle">💬 Comentários (<span class="ccount">0</span>)</button>
+                    </div>
+                    <div class="comments-block">
+                        <div class="comments-list"></div>
+                        <form class="comment-inputs" onsubmit="enviarComentario(event, this)">
+                            <input type="text" placeholder="Seu nome..." required>
+                            <textarea placeholder="Qual seu anime favorito ou qual quer indicação?" rows="2" required></textarea>
+                            <button type="submit">Enviar</button>
+                        </form>
+                    </div>
+                </article>
+
+            </div>
+
+            <aside>
+                <div class="sidebar-box">
+                    <h3>Arquivo</h3>
+                    <ul class="archive-list">
+                        <li><span>📂 Lobos</span> <span>1</span></li>
+                        <li><span>📂 Cavalos</span> <span>1</span></li>
+                        <li><span>📂 Animes</span> <span>1</span></li>
+                    </ul>
+                </div>
+                <div class="sidebar-box" style="text-align: center; font-size: 0.9rem;">
+                    <p style="margin: 0; font-weight: bold; color: var(--text-dark);">Feito com carinho por Yasmim Vitória ✿</p>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <script>
+        // Armazenamento dos dois temas
+        let modoCuriosidades = false;
+
+        const conteudosOriginais = {
+            lobos: `
+                <h2>Lobos: Meus Animais Favoritos</h2>
+                <p>Os lobos são criaturas simplesmente fascinantes. Além da beleza misteriosa, o que eu mais admiro neles é o forte senso de lealdade e união. Eles vivem em alcateias onde cada membro protege o outro.</p>
+                <p>Eles simbolizam a liberdade, a intuição e a força selvagem que me inspira todos os dias.</p>
+                <p><strong>Querem mais informações sobre o modo de vida deles? Deixem nos comentários!</strong></p>
+            `,
+            cavalos: `
+                <h2>A Nobreza e Graciosidade dos Cavalos</h2>
+                <p>Se existe um animal que representa a pura elegância, com certeza é o cavalo. O modo como correm livres transmite uma sensação inexplicável de paz e poder.</p>
+                <p>Eles são companheiros históricos, inteligentes e extremamente sensíveis ao nosso carinho.</p>
+                <p><strong>Se quiserem saber mais sobre raças ou curiosidades, deixem nos comentários o que querem ver no próximo post!</strong></p>
+            `,
+            animes: `
+                <h2>Minha Paixão pelo Universo dos Animes</h2>
+                <p>Os animes ocupam uma parte enorme do meu tempo livre! O que eu mais gosto nas animações japonesas é a capacidade que elas têm de contar histórias profundas e cheias de lições sobre amizade e superação.</p>
+                <p><strong>Caso queiram mais informações sobre as minhas indicações de animes favoritos, deixem nos comentários!</strong></p>
+            `
+        };
+
+        const conteudosCuriosidades = {
+            lobos: `
+                <h2>Cores dos Lobos e Seus Significados</h2>
+                <p>A pelagem do lobo varia conforme seu habitat e carrega significados marcantes:</p>
+                <ul>
+                    <li>🐺 <strong>Lobo Branco:</strong> Simboliza pureza, sabedoria ancestral e adaptação extrema às neves.</li>
+                    <li>🐺 <strong>Lobo Cinzento:</strong> Representa o equilíbrio, o camuflagem perfeita e a essência tradicional da alcateia.</li>
+                    <li>🐺 <strong>Lobo Preto:</strong> Raro e impressionante, representa a liderança forte, mistério e proteção.</li>
+                </ul>
+            `,
+            cavalos: `
+                <h2>Pelagens dos Cavalos e Seus Significados</h2>
+                <p>A cor da pelagem de um cavalo destaca sua beleza única e história:</p>
+                <ul>
+                    <li>🐴 <strong>Tordilho (Branco/Gris):</strong> Associado à sabedoria, nobreza e figuras lendárias.</li>
+                    <li>🐴 <strong>Zaino (Castanho Escuro):</strong> Representa resistência, lealdade e força incansável.</li>
+                    <li>🐴 <strong>Alazão (Dourado/Avermelhado):</strong> Simboliza energia, paixão, velocidade e espírito livre.</li>
+                </ul>
+            `,
+            animes: `
+                <h2>Os Animes Mais Assistidos e Populares</h2>
+                <p>Estes são os títulos mais assistidos e comentados no mundo otaku:</p>
+                <ul>
+                    <li>⚔️ <strong>Attack on Titan (Shingeki no Kyojin):</strong> Uma história épica de mistério e sobrevivência.</li>
+                    <li>🌀 <strong>Naruto / Naruto Shippuden:</strong> O grande clássico sobre determinação e laços de amizade.</li>
+                    <li>⚔️ <strong>Demon Slayer (Kimetsu no Yaiba):</strong> Famoso por sua animação impecável e laços de proteção familiar.</li>
+                    <li>🏴‍☠️ <strong>One Piece:</strong> A maior jornada sobre exploração, sonhos e união de equipe.</li>
+                </ul>
+            `
+        };
+
+        // Função para alternar o tema dos textos
+        function alternarTema() {
+            const btn = document.getElementById("themeBtn");
+            const lobosBox = document.getElementById("post-lobos");
+            const cavalosBox = document.getElementById("post-cavalos");
+            const animesBox = document.getElementById("post-animes");
+
+            if (!modoCuriosidades) {
+                lobosBox.innerHTML = conteudosCuriosidades.lobos;
+                cavalosBox.innerHTML = conteudosCuriosidades.cavalos;
+                animesBox.innerHTML = conteudosCuriosidades.animes;
+                btn.textContent = "🌸 Mudar Tema: Posts de Apresentação";
+                modoCuriosidades = true;
+            } else {
+                lobosBox.innerHTML = conteudosOriginais.lobos;
+                cavalosBox.innerHTML = conteudosOriginais.cavalos;
+                animesBox.innerHTML = conteudosOriginais.animes;
+                btn.textContent = "✨ Mudar Tema: Guia de Curiosidades";
+                modoCuriosidades = false;
+            }
+        }
+
+        // Sistema Interativo de Curtidas
+        const likeButtons = document.querySelectorAll(".like-btn");
+        likeButtons.forEach(btn => {
+            let active = false;
+            btn.addEventListener("click", () => {
+                let num = btn.querySelector("span");
+                if(!active) { num.textContent++; active = true; btn.style.background = "var(--accent-pink)"; btn.style.color = "var(--bg-card)"; }
+                else { num.textContent--; active = false; btn.style.background = "rgba(255,255,255,0.1)"; btn.style.color = "var(--text-light)"; }
+            });
+        });
+
+        // Alternar Visualização dos Comentários
+        const toggles = document.querySelectorAll(".comment-toggle");
+        toggles.forEach(box => {
+            box.addEventListener("click", () => {
+                const card = box.closest("article");
+                const block = card.querySelector(".comments-block");
+                block.style.display = block.style.display === "block" ? "none" : "block";
+            });
+        });
+
+        // Adicionar Comentários Dinâmicos
+        function enviarComentario(e, form) {
+            e.preventDefault();
+            const inputs = form.querySelectorAll("input, textarea");
+            const nome = inputs[0].value;
+            const msg = inputs[1].value;
+
+            const card = form.closest("article");
+            const list = card.querySelector(".comments-list");
+            const counter = card.querySelector(".ccount");
+
+            const newComment = document.createElement("div");
+            newComment.classList.add("comment-row");
+            newComment.innerHTML = `<strong>${nome}:</strong> <span>${msg}</span>`;
+
+            list.appendChild(newComment);
+            counter.textContent = parseInt(counter.textContent) + 1;
+            form.reset();
+        }
+    </script>
+</body>
+</html>
